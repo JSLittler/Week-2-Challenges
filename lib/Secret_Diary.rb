@@ -12,7 +12,7 @@
 
 class Diary
 
-  attr_accessor :entries, :secure
+  attr_reader :entries, :secure
 
   def initialize
     @secure = Security.new
