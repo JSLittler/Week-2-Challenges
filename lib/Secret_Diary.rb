@@ -1,21 +1,9 @@
-#SecretDiary
-# - lock
-# - unlock
-# - add_entry
-# - get_entries
-
-# Initially the `SecretDiary` class is locked, meaning `add_entry` and `get_entries` should throw an error.
-
-# When the user calls `unlock`, `add_entry` and `get_entries` should work as desired.
-
-# When the user calls `lock` again they throw errors again.
-
 class Diary
 
-  attr_reader :entries, :secure
+  attr_accessor :secure
 
-  def initialize
-    @secure = Security.new
+  def initialize(secure = Security.new)
+    @secure = secure
   end
 
   def entries
@@ -42,8 +30,17 @@ end
 
 class Security
 
-  def secure?(input = "lock")
-    input == "unlock" ? (false) : (true)
+  def initialize
+    @lock = true
+  end
+
+  def secure?
+    @lock
+  end
+
+  def toggle
+    @lock == true ? (@lock = false) : (@lock = true)
+    @lock
   end
 
 end
